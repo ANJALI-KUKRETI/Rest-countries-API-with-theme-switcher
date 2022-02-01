@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&family=Nunito:wght@600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark-mode-background: hsl(207, 26%, 17%);
+  --dark-mode-elements: hsl(209, 23%, 22%);
+  --light-mode-text: hsl(200, 15%, 8%);
+  --light-mode-input: hsl(0, 0%, 52%);
+  --light-mode-background: hsl(0, 0%, 98%);
+  --white: hsl(0, 0%, 100%);
+}
+
+html {
+  font-size: 80%;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--light-mode-background);
+  color: var(--light-mode-text);
+}
+
+/* ========================================header========================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100vw;
+  padding: 1rem 5%;
+  background-color: var(--white);
+  font-weight: 800;
+  box-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+header .mode {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+header .mode i {
+  font-size: 1.3rem;
+  margin: 0px 5px;
+}
+.wrapper {
+  margin: auto;
+  max-width: 1440px;
+  padding: 1rem 5%;
+}
+/* ============================searchAndFilter====================== */
+.searchAndFilter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1440px;
+  margin: 2rem 0;
+}
+.searchBar input,
+.filter select {
+  height: 3rem;
+  border: none;
+  box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+.searchBar input:focus,
+.filter select:focus {
+  outline: none;
+}
+.searchBar {
+  position: relative;
+}
+.searchBar input {
+  width: 30rem;
+  padding: 2rem 3.5rem;
+  color: var(--light-mode-input);
+}
+.filter select {
+  width: 15rem;
+  height: 4rem;
+  padding: 0rem 1rem;
+}
+.searchBtn {
+  position: absolute;
+  z-index: 1;
+  top: 1.1rem;
+  font-size: 1.5rem;
+  color: var(--light-mode-input);
+  cursor: pointer;
+  left: 1rem;
+}
+
+/* =================================Cards============================== */
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.card {
+  flex: 0 0 21%;
+  height: 26rem;
+  background-color: var(--white);
+  font-weight: 600;
+  border-radius: 5px;
+  margin: 1.7rem 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+.card img {
+  width: 100%;
+  border-radius: 5px 5px 0px 0px;
+}
+.info {
+  padding: 1rem 2rem;
+}
+.info .name {
+  font-weight: 800;
+  font-size: 18px;
+  margin: 5px;
+}
+.population,
+.region,
+.capital {
+  display: flex;
+  margin: 0.4rem;
+}
+.ans {
+  color: var(--light-mode-input);
+  margin-left: 5px;
+}
+
+/* =============================Responsive========================== */
+@media (max-width: 1024px) {
+  .card {
+    height: 22rem;
+  }
+}
+@media (max-width: 800px) {
+  .searchBar input {
+    width: 20rem;
+  }
+  .filter select {
+    width: 13rem;
+    padding: 0.3rem;
+  }
+}
+@media (max-width: 730px) {
+  .card {
+    flex: 0 0 40%;
+  }
+}
+@media (max-width: 500px) {
+  header {
+    font-size: 0.7rem;
+  }
+  header .mode,
+  header .mode i {
+    font-size: 1rem;
+  }
+  .searchAndFilter {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0;
+  }
+  .searchBar input {
+    width: 90vw;
+    margin-bottom: 2.2rem;
+  }
+  .filter select {
+    width: 40vw;
+    padding: 0rem 1rem;
+  }
+  .cards {
+    flex-direction: column;
+  }
+  .card {
+    width: 60vw;
+  }
+}
