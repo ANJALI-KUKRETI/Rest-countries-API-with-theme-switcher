@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
   background-color: var(--light-mode-background);
   color: var(--light-mode-text);
@@ -57,7 +57,7 @@ header .mode i {
 .wrapper {
   margin: auto;
   max-width: 1440px;
-  padding: 1rem 5%;
+  padding: 1rem 2%;
 }
 /* ============================searchAndFilter====================== */
 .searchAndFilter {
@@ -80,10 +80,7 @@ header .mode i {
 .darkBody .input::placeholder {
   color: var(--white);
 }
-.darkBody select {
-  background-color: var(--dark-mode-elements);
-  color: var(--white);
-}
+
 .searchBar input:focus,
 .filter select:focus {
   outline: none;
@@ -103,6 +100,11 @@ header .mode i {
   width: 15rem;
   height: 4rem;
   padding: 0rem 1rem;
+  color: var(--light-mode-input);
+}
+.darkBody select {
+  background-color: var(--dark-mode-elements);
+  color: var(--white);
 }
 .searchBtn {
   position: absolute;
@@ -117,6 +119,9 @@ header .mode i {
   color: var(--white);
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+}
 /* =================================Cards============================== */
 
 .cards {
@@ -212,12 +217,13 @@ header .mode i {
 }
 @media (max-width: 730px) {
   .card {
-    flex: 0 0 40%;
+    flex: 0 0 44%;
   }
 }
 @media (max-width: 500px) {
   header {
     font-size: 0.7rem;
+    width: 98vw;
   }
   header .mode,
   header .mode i {
@@ -229,7 +235,7 @@ header .mode i {
     margin: 0;
   }
   .searchBar input {
-    width: 90vw;
+    width: 88vw;
     margin-bottom: 2.2rem;
   }
   .filter select {
@@ -240,6 +246,11 @@ header .mode i {
     flex-direction: column;
   }
   .card {
-    width: 60vw;
+    width: 65vw;
+  }
+}
+@media (max-width: 425px) {
+  .card {
+    width: 78vw;
   }
 }
