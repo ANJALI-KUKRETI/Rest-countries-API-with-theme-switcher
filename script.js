@@ -5,8 +5,10 @@ const cards = document.querySelector(".cards");
 const loader = document.querySelector(".loader");
 const regions = document.querySelector("#regions");
 const input = document.querySelector(".input");
+const main = document.querySelector("main");
 
 // =====================Functions==========================
+
 function displayLoader() {
   loader.classList.add("show");
   setTimeout(() => {
@@ -50,8 +52,27 @@ async function fetchByName(name) {
     window.alert(err.message);
   }
 }
+
+async function fetchByBorder(name) {
+  try {
+    displayLoader();
+    const res = await fetch(`https://restcountries.com/v3.1/alpha/${name}`);
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error("Oops! This country doesn't exist");
+    }
+    if (res.ok) {
+      hideLoader();
+      return data;
+    }
+  } catch (err) {
+    window.alert(err.message);
+  }
+}
 function displayCards(single) {
-  const html = `<div class="card">
+  const html = `
+  <a href="#${single.name.common}" class="detail">
+  <div class="card">
     <div class="image">
       <img src="${single.flags.png}" alt="" />
     </div>
@@ -70,12 +91,106 @@ function displayCards(single) {
         <p class="ans">${single.capital}</p></span
       >
     </div>
-  </div>`;
+  </div>
+  </a>`;
   cards.insertAdjacentHTML("beforeend", html);
 }
+
+function displayDetailsView(country) {
+  console.log(country.borders.length);
+  const html = `  <section id="#${country.name.common}" class="pageDetail">
+  <a href="" class="back">
+    <button class="backBtn"><i class="fas fa-arrow-left"></i>Back</button>
+  </a>
+  <div class="about">
+    <div class="flagImage">
+      <img src="${country.flags.png}" alt="" />
+    </div>
+    <div class="details">
+      <h2>${country.name.common}</h2>
+      <div class="inner">
+        <div class="one">
+          <span class="capital"
+            ><h4>Native Name:</h4>
+            <p class="ans">${
+              Object.values(country.name.nativeName)[0].common
+            }</p></span
+          >
+          <span class="capital"
+            ><h4>Population:</h4>
+            <p class="ans">${country.population}</p></span
+          >
+          <span class="capital"
+            ><h4>Region:</h4>
+            <p class="ans">${country.region}</p></span
+          >
+          <span class="capital"
+            ><h4>Sub Region:</h4>
+            <p class="ans">${country.subregion}</p></span
+          >
+          <span class="capital"
+            ><h4>Capital:</h4>
+            <p class="ans">${country.capital}</p></span
+          >
+        </div>
+        <div class="two">
+          <span class="capital"
+            ><h4>Top Level Domain:</h4>
+            <p class="ans">${country.tld[0]}</p></span
+          >
+          <span class="capital"
+            ><h4>Currencies:</h4>
+            <p class="ans">Euro</p></span
+          >
+          <span class="capital"
+            ><h4>Languages</h4>
+            <p class="ans">${Object.values(country.languages).join(
+              ", "
+            )}</p></span
+          >
+        </div>
+      </div>
+      <div class="borderCountries">
+        <h4>Border Countries:</h4>
+        ${
+          country.borders &&
+          country.borders.forEach((border) => {
+            // console.log(border);
+            createBorder(border);
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>`;
+  // console.log(createBorder(country));
+  return html;
+}
+async function createBorder(border) {
+  const borderDetail = await fetchByBorder(border);
+  let borderElem = document.createElement("a");
+  borderElem.classList.add("neighbour");
+  borderElem.setAttribute("href", `#${borderDetail[0].name.common}`);
+  borderElem.textContent = borderDetail[0].name.common;
+  document.querySelector(".borderCountries").append(borderElem);
+}
+
+async function displayDetails(data) {
+  main.innerHTML = "";
+  const country = await fetchByName(data.toLowerCase());
+  // console.log(country);
+  const elemToView = displayDetailsView(country[0]);
+  main.insertAdjacentHTML("beforeend", elemToView);
+  document.querySelector(".backBtn").addEventListener("click", () => {
+    window.location.href.split("#")[0];
+    // console.log();
+    // window.history.back();
+  });
+}
+
 async function displayData() {
   const data = await fetchData();
-  console.log(data);
+  // console.log(data);
   data.forEach((single) => {
     displayCards(single);
   });
@@ -118,4 +233,11 @@ mode.addEventListener("click", function () {
 regions.addEventListener("click", (e) => {
   displayRegionWise(e);
 });
-window.addEventListener("load", displayData);
+window.addEventListener("hashchange", () => {
+  console.log(window.location.hash.slice(1));
+  displayDetails(window.location.hash.slice(1));
+});
+window.addEventListener("load", () => {
+  displayData();
+  // window.location.pathname = "/index.html";
+});

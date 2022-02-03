@@ -24,32 +24,88 @@
       <!-- <i class="fas fa-moon"></i> -->
     </header>
     <div class="wrapper">
-      <section class="searchAndFilter">
-        <div class="searchBar">
-          <div class="searchBtn"><i class="fas fa-search"></i></div>
-          <input
-            type="text"
-            class="input"
-            placeholder="Search for a country..."
-          />
+      <main>
+        <section class="searchAndFilter">
+          <div class="searchBar">
+            <div class="searchBtn"><i class="fas fa-search"></i></div>
+            <input
+              type="text"
+              class="input"
+              placeholder="Search for a country..."
+            />
+          </div>
+          <div class="filter">
+            <select name="regions" class="not" id="regions">
+              <option value="" disabled selected hidden>
+                Filter by region<i class="fas fa-chevron-down"></i>
+              </option>
+              <option class="opt" value="Africa">Africa</option>
+              <option class="opt" value="Americas">Americas</option>
+              <option class="opt" value="Asia">Asia</option>
+              <option class="opt" value="Europe">Europe</option>
+              <option class="opt" value="Ocenia">Ocenia</option>
+            </select>
+          </div>
+        </section>
+        <div class="loader"></div>
+        <section class="cards"></section>
+
+        <!-- <section id="" class="pageDetail hidden">
+        <div class="back">
+          <button class="backBtn"><i class="fas fa-arrow-left"></i>Back</button>
         </div>
-        <div class="filter">
-          <select name="regions" class="not" id="regions">
-            <option value="" disabled selected hidden>
-              Filter by region<i class="fas fa-chevron-down"></i>
-            </option>
-            <option class="opt" value="Africa">Africa</option>
-            <option class="opt"  value="Americas">Americas</option>
-            <option class="opt"  value="Asia">Asia</option>
-            <option class="opt"  value="Europe">Europe</option>
-            <option class="opt"  value="Ocenia">Ocenia</option>
-          </select>
+        <div class="about">
+          <div class="flagImage">
+            <img src="https://flagcdn.com/w320/aw.png" alt="" />
+          </div>
+          <div class="details">
+            <h2>Belgium</h2>
+            <div class="inner">
+              <div class="one">
+                <span class="capital"
+                  ><h4>Native Name:</h4>
+                  <p class="ans">Belgie</p></span
+                >
+                <span class="capital"
+                  ><h4>Population:</h4>
+                  <p class="ans">11,319,511</p></span
+                >
+                <span class="capital"
+                  ><h4>Region:</h4>
+                  <p class="ans">Europe</p></span
+                >
+                <span class="capital"
+                  ><h4>Sub Region:</h4>
+                  <p class="ans">Western Europe</p></span
+                >
+                <span class="capital"
+                  ><h4>Capital:</h4>
+                  <p class="ans">Brussels</p></span
+                >
+              </div>
+              <div class="two">
+                <span class="capital"
+                  ><h4>Top Level Domain:</h4>
+                  <p class="ans">.be</p></span
+                >
+                <span class="capital"
+                  ><h4>Currencies:</h4>
+                  <p class="ans">Euro</p></span
+                >
+                <span class="capital"
+                  ><h4>Languages</h4>
+                  <p class="ans">Dutch,French,German</p></span
+                >
+              </div>
+            </div>
+            <div class="borderCountries">
+              <h4>Border Countries:</h4>
+              <button class="neighbour">France</button>
+            </div>
+          </div>
         </div>
-      </section>
-      <div class="loader"></div>
-      <section class="cards">
-        </div>
-      </section>
+      </section> -->
+      </main>
     </div>
     <script src="script.js"></script>
   </body>
