@@ -358,6 +358,9 @@ header .mode i {
   header {
     font-size: 0.7rem;
   }
+  .loader {
+    left: 45%;
+  }
   .card img {
     height: 14rem;
   }
