@@ -6,6 +6,7 @@ const loader = document.querySelector(".loader");
 const regions = document.querySelector("#regions");
 const input = document.querySelector(".input");
 const main = document.querySelector("main");
+const mainPage = document.querySelector(".mainPage");
 
 // =====================Functions==========================
 
@@ -97,9 +98,9 @@ function displayCards(single) {
 }
 
 function displayDetailsView(country) {
-  console.log(country.borders.length);
+  // console.log(country.borders.length);
   const html = `  <section id="#${country.name.common}" class="pageDetail">
-  <a href="" class="back">
+  <a href="#mainPage" class="back">
     <button class="backBtn"><i class="fas fa-arrow-left"></i>Back</button>
   </a>
   <div class="about">
@@ -152,39 +153,32 @@ function displayDetailsView(country) {
       </div>
       <div class="borderCountries">
         <h4>Border Countries:</h4>
-        ${
-          country.borders &&
-          country.borders.forEach((border) => {
-            // console.log(border);
-            createBorder(border);
-          })
-        }
+      
       </div>
     </div>
   </div>
 </section>`;
-  // console.log(createBorder(country));
   return html;
-}
-async function createBorder(border) {
-  const borderDetail = await fetchByBorder(border);
-  let borderElem = document.createElement("a");
-  borderElem.classList.add("neighbour");
-  borderElem.setAttribute("href", `#${borderDetail[0].name.common}`);
-  borderElem.textContent = borderDetail[0].name.common;
-  document.querySelector(".borderCountries").append(borderElem);
 }
 
 async function displayDetails(data) {
   main.innerHTML = "";
+  mainPage.classList.add("hidden");
   const country = await fetchByName(data.toLowerCase());
   // console.log(country);
   const elemToView = displayDetailsView(country[0]);
   main.insertAdjacentHTML("beforeend", elemToView);
-  document.querySelector(".backBtn").addEventListener("click", () => {
-    window.location.href.split("#")[0];
-    // console.log();
-    // window.history.back();
+  let borderCountries = country[0].borders;
+
+  const parent = document.querySelector(".borderCountries");
+  borderCountries.forEach((ele) => {
+    fetchByBorder(ele).then((border) => {
+      const tag = document.createElement("a");
+      tag.classList.add("neighbour");
+      tag.setAttribute("href", `#${border[0].name.common}`);
+      tag.textContent = border[0].name.common;
+      parent.append(tag);
+    });
   });
 }
 
@@ -227,6 +221,7 @@ input.addEventListener("keyup", async function (e) {
   }
 });
 // ==========================Event Listeners============================
+
 mode.addEventListener("click", function () {
   body.classList.toggle("darkBody");
 });
@@ -234,10 +229,15 @@ regions.addEventListener("click", (e) => {
   displayRegionWise(e);
 });
 window.addEventListener("hashchange", () => {
-  console.log(window.location.hash.slice(1));
-  displayDetails(window.location.hash.slice(1));
+  if (window.location.hash.slice(1) === "mainPage") {
+    const pageDetail = document.querySelector(".pageDetail");
+    pageDetail.remove();
+    mainPage.classList.remove("hidden");
+    main.append(mainPage);
+  } else {
+    displayDetails(window.location.hash.slice(1));
+  }
 });
 window.addEventListener("load", () => {
   displayData();
-  // window.location.pathname = "/index.html";
 });

@@ -384,6 +384,9 @@ header .mode i {
   .inner {
     flex-direction: column;
   }
+  .borderCountries {
+    margin-top: 3rem;
+  }
   .card {
     width: 65vw;
   }
