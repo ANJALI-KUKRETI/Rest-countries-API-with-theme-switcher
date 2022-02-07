@@ -141,7 +141,9 @@ function displayDetailsView(country) {
           >
           <span class="capital"
             ><h4>Currencies:</h4>
-            <p class="ans">Euro</p></span
+            <p class="ans">${
+              Object.values(country.currencies)[0].name
+            }</p></span
           >
           <span class="capital"
             ><h4>Languages</h4>
