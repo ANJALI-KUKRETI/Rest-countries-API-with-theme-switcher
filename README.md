@@ -21,7 +21,7 @@ This project is a Frontend Mentor challenge, where we have to integrate with RES
 * Click through to the border countries on the detail page
 * Toggle the color scheme between light and dark mode
 
-### Sample Video
+### Project Demo
 
 https://user-images.githubusercontent.com/89701349/155752091-70b87fed-02e2-4ba3-80ca-c2953d21225f.mp4
  
